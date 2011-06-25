@@ -1,6 +1,5 @@
 package amazon.seadroids.smileiknow;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +13,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
     }
     
-    public void signIn(View v){
+    public void signIn(View v){	
     	Intent myIntent = new Intent(v.getContext(), HomeActivity.class);
         startActivityForResult(myIntent, 0);
     }
+    
+    
 }
