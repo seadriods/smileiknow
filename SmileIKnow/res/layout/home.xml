@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@color/background_color">
+<!--         <ImageView android:src="@drawable/amazon" android:id="@+id/imageView1" android:layout_width="wrap_content" android:layout_height="wrap_content"></ImageView> -->
+        <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:id="@+id/webview"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		/>
+    </LinearLayout>

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, SmileIKnowActivity!</string>
-    <string name="app_name">SmileIKnow</string>
+    <string name="hello">Hello World, TestActivity!</string>
+    <string name="app_name">Amazon</string>
+    <string name="sign_in">Sign in using our secure server</string>
+    <string name="sign_in_label">Sign in to Amazon.com </string>
+    <string name="sign_in_title">Sign In</string>
+    <string name="home_title">Amazon</string>
+    <string name="homepage_url">http://www.amazon.com/gp/aw/h.html</string>
 </resources>
