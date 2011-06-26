@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -26,16 +25,12 @@ public class MainActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (SharedData.userId == null) {
-			setContentView(R.layout.main);
-		} else {
-			setContentView(R.layout.home);
-		}
+		setContentView(R.layout.main);
+		
 		editUsername = (EditText) findViewById(R.id.editUsername);
 		editPassword = (EditText) findViewById(R.id.editPassword);
-
 	}
-
+/*
 	@Override
 	public void onResume() {
 
@@ -45,7 +40,7 @@ public class MainActivity extends Activity {
 			startActivityForResult(myIntent, 0);
 		}
 	}
-
+*/
 	public static byte[] getBytesFromFile(InputStream is) {
 		try {
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
