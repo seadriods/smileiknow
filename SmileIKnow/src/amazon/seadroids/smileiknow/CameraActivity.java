@@ -1,26 +1,19 @@
 package amazon.seadroids.smileiknow;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.ByteArrayOutputStream;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.hardware.Camera;
-import android.hardware.Camera.PictureCallback;
-import android.hardware.Camera.ShutterCallback;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class CameraActivity extends Activity {
-	Camera camera;
-	Preview preview;
-	ImageButton buttonTakePicture;
+
+	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1337;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -28,54 +21,66 @@ public class CameraActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.camera);
 
-		preview = new Preview(this);
-		((FrameLayout) findViewById(R.id.preview)).addView(preview);
+		useCamera();
 
-		buttonTakePicture = (ImageButton) findViewById(R.id.buttonTakePicture);
-		buttonTakePicture.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				preview.camera.takePicture(shutterCallback, rawCallback,
-						jpegCallback);
-			}
-		});
+	}
+	
+	private void useCamera(){
+		Intent cameraIntent = new Intent(
+				android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+		startActivityForResult(cameraIntent,
+				CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
 
-	ShutterCallback shutterCallback = new ShutterCallback() {
-		public void onShutter() {
-		
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+			    Bitmap bmp = (Bitmap) data.getExtras().get("data");
+			    ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+			    bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object   
+			    byte[] bytes = baos.toByteArray();
+			    
+			    ImageView preview = (ImageView) findViewById(R.id.photoResultView);
+			    preview.setImageBitmap(bmp);
+			    
+			    ProgressDialog progressDlg = ProgressDialog.show(this, null, "Processing, please wait");
+			    boolean result = CollageHandler.pushImage(SharedData.userId, bytes);
+				progressDlg.dismiss();
+				if (result)
+					showDialog("Your picture has been submitted to Amazon.com");
+				else
+					showDialog("Oops, an error occured, please try again later");
+			}else if (resultCode==RESULT_CANCELED){
+				showDialog(null);
+			} else {
+				Intent myIntent = new Intent(CameraActivity.this, HomeActivity.class);
+		        startActivityForResult(myIntent, 0);
+			} 
 		}
-	};
-
-	/** Handles data for raw picture */
-	PictureCallback rawCallback = new PictureCallback() {
-		public void onPictureTaken(byte[] data, Camera camera) {
-		}
-	};
-
-	/** Handles data for jpeg picture */
-	PictureCallback jpegCallback = new PictureCallback() {
-		public void onPictureTaken(byte[] data, Camera camera) {
-			ProgressDialog dialog = ProgressDialog.show(CameraActivity.this, "", 
-		            "Processing, Please wait...", true);
-			FileOutputStream outStream = null;
-			try { 
-				// write to sdcard
-				outStream = new FileOutputStream(String.format(
-						"/sdcard/%d.jpg", System.currentTimeMillis()));
-				outStream.write(data);
-				outStream.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
+	}
+	
+	private void showDialog(String msg){
+		AlertDialog alertDlg = new AlertDialog.Builder(this).create();
+		alertDlg.setMessage(msg);
+		alertDlg.setButton("Take another picture", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				useCamera();
 			}
-			dialog.dismiss();
-			Intent myIntent = new Intent(CameraActivity.this, HomeActivity.class);
-	        startActivityForResult(myIntent, 0);
-		}
-	};
-	
-	
+		});
+		
+		alertDlg.setButton2("Continue shopping", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent myIntent = new Intent(CameraActivity.this, HomeActivity.class);
+		        startActivityForResult(myIntent, 0);
+			}
+		});
+		
+		alertDlg.show();
+	}
 
 }

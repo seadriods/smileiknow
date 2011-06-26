@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/linearLayout1" android:orientation="vertical" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@color/background_color">
-<!--         <ImageView android:src="@drawable/amazon" android:id="@+id/imageView1" android:layout_width="wrap_content" android:layout_height="wrap_content"></ImageView> -->
-        <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
-		    android:id="@+id/webview"
-		    android:layout_width="fill_parent"
-		    android:layout_height="fill_parent"
-		/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/linearLayout1" android:background="@color/background_color" android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical">
+        <ImageView android:src="@drawable/amazon" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/imageView1"></ImageView>
+        <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout4" android:layout_width="fill_parent">
+            <LinearLayout android:layout_height="fill_parent" android:id="@+id/linearLayout3" android:orientation="vertical" android:layout_width="wrap_content">
+                <ImageView android:src="@drawable/kindle" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="wrap_content" android:id="@+id/imageView2"></ImageView>
+                <ImageView android:src="@drawable/wingsofliberty" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="wrap_content" android:id="@+id/imageView3"></ImageView>
+                <ImageView android:src="@drawable/nerf" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="wrap_content" android:id="@+id/imageView4"></ImageView>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/linearLayout2" android:orientation="vertical" android:layout_height="fill_parent" android:layout_width="100dip">
+                <TextView 
+                	android:text="I LOVE JEFF BEZOS!"
+                 	android:id="@+id/textView1"
+                 	android:layout_height="wrap_content"
+                 	android:textAppearance="?android:attr/textAppearanceMedium" 
+                 	android:layout_width="wrap_content"
+                 	android:textColor="@color/text_color"
+                 	android:layout_weight="1">
+                </TextView>
+                <TextView 
+                	android:textColor="@color/text_color"
+                	android:text="ZERG RUSH GG!"
+                	android:id="@+id/textView2"
+                	android:layout_height="wrap_content"
+                	android:textAppearance="?android:attr/textAppearanceMedium"
+                	android:layout_width="wrap_content"
+                	android:layout_weight="1">
+                </TextView>
+                <TextView
+                	 android:text="THIS IS THE BEST GUN EVAR!"
+                	 android:id="@+id/textView3"
+                	 android:layout_height="wrap_content"
+                	 android:textAppearance="?android:attr/textAppearanceMedium"
+                	 android:layout_width="wrap_content"
+                	 android:textColor="@color/text_color"
+                	 android:layout_weight="1">
+                </TextView>
+            </LinearLayout>
+            <LinearLayout android:layout_height="fill_parent" android:layout_weight="1" android:orientation="vertical" android:layout_width="wrap_content">
+                <ImageButton android:padding="10dp" android:id="@+id/buy_button1" android:background="@drawable/buynow" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"></ImageButton>
+                <ImageButton android:padding="10dp" android:id="@+id/buy_button2" android:background="@drawable/buynow" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"></ImageButton>
+                <ImageButton android:padding="10dp" android:id="@+id/buy_button3" android:background="@drawable/buynow" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"></ImageButton>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
