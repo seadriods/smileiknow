@@ -6,10 +6,12 @@ import java.io.InputStream;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +22,9 @@ public class MainActivity extends Activity {
 	EditText editUsername;
 	EditText editPassword;
 	ImageButton btnSignIn;
+	
+	byte[] imageBytes;
+	ProgressDialog progressDlg;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -30,17 +35,7 @@ public class MainActivity extends Activity {
 		editUsername = (EditText) findViewById(R.id.editUsername);
 		editPassword = (EditText) findViewById(R.id.editPassword);
 	}
-/*
-	@Override
-	public void onResume() {
-
-		super.onResume();
-		if (SharedData.userId != null) {
-			Intent myIntent = new Intent(this, HomeActivity.class);
-			startActivityForResult(myIntent, 0);
-		}
-	}
-*/
+	
 	public static byte[] getBytesFromFile(InputStream is) {
 		try {
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -67,7 +62,7 @@ public class MainActivity extends Activity {
 		}
 		
 		EditText username = (EditText) findViewById(R.id.editUsername);
-		SharedData.userId = username.getText().toString();
+		//SharedData.userId = username.getText().toString();
 
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
@@ -85,18 +80,11 @@ public class MainActivity extends Activity {
 					ContentResolver cr = getContentResolver();
 					InputStream is = cr.openInputStream(uri);
 					// Get binary bytes for encode
-					byte[] data = getBytesFromFile(is);
+					imageBytes = getBytesFromFile(is);
 
-					// base 64 encode for text transmission (HTTP)
-					// byte[] encoded_data = Base64.encodeBase64(data);
-					// String data_string = new String(encoded_data); // convert
-					// to
-					// string
+					progressDlg = ProgressDialog.show(this, null, "Processing, please wait");
+					new UploadInBackground().execute();
 
-					// SendRequest(data_string);
-
-					showDialog("Your picture has been submitted to Amazon.com");
-					return;
 				} catch (Exception e) {
 					Log.e(this.getClass().getName(), e.toString());
 				}
@@ -126,5 +114,29 @@ public class MainActivity extends Activity {
 
 		alertDlg.show();
 	}
+	
+	private class UploadInBackground extends AsyncTask<String, Integer, Long> {
+		@Override
+		protected Long doInBackground(String... params) {
+			boolean result = ServiceHandler.sendImage(imageBytes);
+			return result ? new Long(1) : null;
+		}
+
+		@Override
+		protected void onProgressUpdate(Integer... progress) {
+		}
+
+		@Override
+		protected void onPostExecute(Long result) {
+			progressDlg.dismiss();
+
+			if (result != null)
+				showDialog("Your picture has been submitted to Amazon.com");
+			else
+				showDialog("Oops, an error occured, please try again later");
+
+		}
+	}
+
 
 }

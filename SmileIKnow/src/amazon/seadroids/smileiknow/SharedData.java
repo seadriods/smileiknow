@@ -1,5 +1,5 @@
 package amazon.seadroids.smileiknow;
 
 public class SharedData {
-	public static String userId;
+	public static String userId = "3";
 }

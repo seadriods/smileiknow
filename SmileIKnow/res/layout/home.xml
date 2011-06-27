@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/linearLayout1" android:background="@color/background_color" android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical">
         <ImageView android:src="@drawable/amazon" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/imageView1"></ImageView>
+        <android.webkit.WebView android:layout_width="fill_parent" android:layout_height="50dip" android:id="@+id/webViewCollageHome"></android.webkit.WebView>
         <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout4" android:layout_width="fill_parent">
             <LinearLayout android:layout_height="fill_parent" android:id="@+id/linearLayout3" android:orientation="vertical" android:layout_width="wrap_content">
                 <ImageView android:src="@drawable/kindle" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="wrap_content" android:id="@+id/imageView2"></ImageView>
