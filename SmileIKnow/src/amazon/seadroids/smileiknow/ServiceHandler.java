@@ -21,6 +21,7 @@ public class ServiceHandler {
 	 * Gets the smile-I-know collage URL
 	 */
 	public static String getCollage() {
+		/*
 		String postData = "";
 		try {
 			postData = URLEncoder.encode("uid", "UTF-8") + "="
@@ -29,7 +30,8 @@ public class ServiceHandler {
 			e.printStackTrace();
 		}
 		return sendRequest(postData, "/getCollage",true);
-
+		 */
+		return "http://"+SERVICE_HOSTNAME+":"+SERVICE_PORT+"/users/"+SharedData.userId+"/getCollage?m=mobile";
 	}
 
 	public static boolean processOrder(String productId) {

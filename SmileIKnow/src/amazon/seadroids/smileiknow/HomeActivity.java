@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.*;
 import android.app.AlertDialog;
@@ -24,6 +25,8 @@ public class HomeActivity extends Activity {
 	WebView webViewCollage;
 	
 	ProgressDialog progressDlg;
+	
+	private final String PROGRESS_URL = "http://www.tutoriallounge.com/wp-content/uploads/26.gif";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,12 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.home);
 
 		webViewCollage = (WebView) findViewById(R.id.webViewCollageHome);
-		// webViewCollage.loadUrl(CollageHandler.getCollage());
+		WebSettings webSettings = webViewCollage.getSettings();
+	    webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+	    
+	    String page = "<p align='center'><img src='"+ServiceHandler.getCollage()+"'/>";
+	    webViewCollage.loadData(page, "text/html", "utf-8");
+		
 
 		// add actions to buttons
 		this.button1 = (ImageButton) findViewById(R.id.buy_button1);
@@ -62,7 +70,9 @@ public class HomeActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// webViewCollage.loadUrl(CollageHandler.getCollage());
+	    String page = "<p align='center'><img src='"+ServiceHandler.getCollage()+"'/>";
+	    webViewCollage.loadData(page, "text/html", "utf-8");
+
 	}
 
 	@Override
@@ -98,6 +108,7 @@ public class HomeActivity extends Activity {
 
 		alertDlg.show();
 	}
+	
 
 	private class UploadInBackground extends AsyncTask<String, Integer, Long> {
 		@Override
@@ -121,5 +132,6 @@ public class HomeActivity extends Activity {
 
 		}
 	}
+	
 
 }

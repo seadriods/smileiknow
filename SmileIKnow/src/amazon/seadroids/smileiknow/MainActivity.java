@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
 	EditText editUsername;
 	EditText editPassword;
 	ImageButton btnSignIn;
-	
+
 	byte[] imageBytes;
 	ProgressDialog progressDlg;
 
@@ -31,11 +31,11 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		editUsername = (EditText) findViewById(R.id.editUsername);
 		editPassword = (EditText) findViewById(R.id.editPassword);
 	}
-	
+
 	public static byte[] getBytesFromFile(InputStream is) {
 		try {
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -60,9 +60,9 @@ public class MainActivity extends Activity {
 				|| (editPassword.getText().length() == 0)) {
 			return;
 		}
-		
+
 		EditText username = (EditText) findViewById(R.id.editUsername);
-		//SharedData.userId = username.getText().toString();
+		// SharedData.userId = username.getText().toString();
 
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
@@ -82,7 +82,8 @@ public class MainActivity extends Activity {
 					// Get binary bytes for encode
 					imageBytes = getBytesFromFile(is);
 
-					progressDlg = ProgressDialog.show(this, null, "Processing, please wait");
+					progressDlg = ProgressDialog.show(this, null,
+							"Processing, please wait");
 					new UploadInBackground().execute();
 
 				} catch (Exception e) {
@@ -114,8 +115,8 @@ public class MainActivity extends Activity {
 
 		alertDlg.show();
 	}
-	
-	private class UploadInBackground extends AsyncTask<String, Integer, Long> {
+
+		private class UploadInBackground extends AsyncTask<String, Integer, Long> {
 		@Override
 		protected Long doInBackground(String... params) {
 			boolean result = ServiceHandler.sendImage(imageBytes);
@@ -137,6 +138,5 @@ public class MainActivity extends Activity {
 
 		}
 	}
-
 
 }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/linearLayout1" android:background="@color/background_color" android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical">
         <ImageView android:src="@drawable/amazon" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/imageView1"></ImageView>
-        <android.webkit.WebView android:layout_width="fill_parent" android:layout_height="50dip" android:id="@+id/webViewCollageHome"></android.webkit.WebView>
+        <android.webkit.WebView android:layout_width="fill_parent" android:id="@+id/webViewCollageHome" android:layout_height="85dip"></android.webkit.WebView>
         <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout4" android:layout_width="fill_parent">
             <LinearLayout android:layout_height="fill_parent" android:id="@+id/linearLayout3" android:orientation="vertical" android:layout_width="wrap_content">
                 <ImageView android:src="@drawable/kindle" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="wrap_content" android:id="@+id/imageView2"></ImageView>
                 <ImageView android:src="@drawable/wingsofliberty" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="wrap_content" android:id="@+id/imageView3"></ImageView>
-                <ImageView android:src="@drawable/nerf" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="wrap_content" android:id="@+id/imageView4"></ImageView>
+                <ImageView android:layout_weight="1" android:src="@drawable/nerf" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/imageView4"></ImageView>
             </LinearLayout>
             <LinearLayout android:id="@+id/linearLayout2" android:orientation="vertical" android:layout_height="fill_parent" android:layout_width="100dip">
                 <TextView 
-                	android:text="I LOVE JEFF BEZOS!"
+                	android:text="Amazon Kindle   $140"
                  	android:id="@+id/textView1"
                  	android:layout_height="wrap_content"
                  	android:textAppearance="?android:attr/textAppearanceMedium" 
@@ -20,7 +20,7 @@
                 </TextView>
                 <TextView 
                 	android:textColor="@color/text_color"
-                	android:text="ZERG RUSH GG!"
+                	android:text="Starcraft II: Wings of Liberty      $50"
                 	android:id="@+id/textView2"
                 	android:layout_height="wrap_content"
                 	android:textAppearance="?android:attr/textAppearanceMedium"
@@ -28,7 +28,7 @@
                 	android:layout_weight="1">
                 </TextView>
                 <TextView
-                	 android:text="THIS IS THE BEST GUN EVAR!"
+                	 android:text="Nerf NightStrike   $12"
                 	 android:id="@+id/textView3"
                 	 android:layout_height="wrap_content"
                 	 android:textAppearance="?android:attr/textAppearanceMedium"

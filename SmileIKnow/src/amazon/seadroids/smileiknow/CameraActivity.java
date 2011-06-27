@@ -45,7 +45,7 @@ public class CameraActivity extends Activity {
 				Bitmap bmp = (Bitmap) data.getExtras().get("data");
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-				bmp.compress(Bitmap.CompressFormat.JPEG, 60, baos);
+				bmp.compress(Bitmap.CompressFormat.JPEG, 90, baos);
 				imageBytes = baos.toByteArray();
 
 				/*
